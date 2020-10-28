@@ -1,0 +1,35 @@
+def getYoungestAncestor(topNode, descendantOne, descendantTwo):
+
+  depthOne = getDepth(descendantOne, topNode)
+  depthTwo = getDepth(descendantTwo, topNode)
+
+  if depthOne > depthTwo :
+    return Ancestor(descendantOne, descendantTwo, depthOne-depthTwo)
+  else:
+    return Ancestor(descendantTwo, descendantOne, depthTwo-depthOne)
+
+
+
+def Ancestor(lowerDescendant, higherDescendant, diff ):
+
+  while diff > 0:
+    lowerDescendant = lowerDescendant.ancenstor
+    diff -= 1
+
+  # now both are at same level 
+  while lowerDescendant != higherDescendant:
+    lowerDescendant = lowerDescendant.ancestor
+    higherDescendant = higherDescendant.ancestor
+  
+  return lowerDescendant
+
+def getDepth(descendant, topNode):
+  depth = 0
+
+  while descendant != topNode :
+    depth += 1
+    descendant = descendant.ancestor
+
+  return depth
+
+
